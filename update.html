@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>下载MISS App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <link rel="shortcut icon" href="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/favicon.ico" type="image/x-icon">
+  <script src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/jssdk.js?id=dnc3sadfwe4woosxza"></script>
+  <script>
+    statisticsSDK.getkey();
+    statisticsSDK.trackStatistics();
+    let referrer = document.referrer;
+    statisticsSDK.setReferrer(referrer);
+  </script>
+  <script type="text/javascript" charset="UTF-8" src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/openinstall.js"></script>
+  <script type="text/javascript">
+    function getQueryString(name) {
+      let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      let r = window.location.search.substr(1).match(reg); //获取url中"?"符后的字符串并正则匹配
+      let context = "";
+      if (r != null) context = r[2];
+      reg = null;
+      r = null;
+      return context == null || context == "" || context == "undefined" ?
+        "" :
+        context;
+    }
+    var data = OpenInstall.parseUrlParams();
+    new OpenInstall({
+      appKey: "ui986b",
+      onready: function () {
+        var m = this, button = document.getElementById("downloadButton");
+        button.onclick = function () {
+          let u = navigator.userAgent;
+          let isAndroid = u.indexOf("Android") > -1 || u.indexOf("Adr") > -1; //android终端
+          let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+          if (isAndroid) {
+            statisticsSDK.androidDownloadCount()
+          } else {
+            statisticsSDK.iosDownloadCount();
+          }
+          if (getQueryString('update')) {
+            alert('请先卸载掉之前的APP后，再点更新按钮');
+            m.install();
+          } else {
+            m.wakeupOrInstall();
+          }
+          return false;
+        }
+      }
+    }, data);
+  </script>
+  <link rel="stylesheet" href="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/style.css">
+</head>
+
+<body>
+  <div class="main">
+    <div class="top"></div>
+    <div class="download">
+      <div class="download-btn">
+        <div class="title">下载MISS APP上万视频免费观看，美女现场直播，同城约会，游戏种类齐全，更多精彩尽在MISS</div>
+        <a class="tutorial" href="https://support.apple.com/zh-cn/HT204460"></a>
+        <div class="btn" id="downloadButton">
+          <div class="ios">APP 下载</div>
+          <div class="android">APP 下载</div>
+        </div>
+        <br>
+        <a class="tutorial" style="font-size: 18px; color: #fff;" href="https://tsregbfnjki.com">
+          <img style="zoom: 0.7;" src="./img/customerService.png" alt="">
+        </a>
+        <div style="display: none;" class="update">更新MISS APP之前，请先卸载掉之前的APP后，再点更新按钮</div>
+        <div style="display: none;" class="codeQR" id="codeQR">
+          <div class="codeQR-text">分享好友，扫码下载APP，即可获得免费观看视频</div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+  </div>
+  <div class="hint" id="hint">
+    <div class="hintContent">
+    <div class="close" id="close">
+      <img src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/close.png" alt="" />
+    </div>
+    <div class="title">更新流程</div>
+    <div class="bg" id="bg1">
+      <div class="content">
+        <div class="text">
+          <div>请记住，主域名</div>
+          <div><b>miss88.com</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="bg" id="bg2">
+      <img src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/2.png" alt="" />
+    </div>
+    <div class="bg" id="bg3">
+      <img src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/3.png" alt="" />
+      <img class="bg3_1" src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/3_1.png" alt="" />
+    </div>
+    <div class="list">
+      <span class="list1" id="list1"></span>
+      <span class="list2" id="list2"></span>
+      <span class="list3" id="list3"></span>
+    </div>
+    <div class="hintBtn" id="btn">
+      <img src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/next.png" alt="" />
+    </div>
+  </div>
+  </div>
+</body>
+</html>
+<script src="http://lianluoyi.oss-cn-shenzhen.aliyuncs.com/1669625247240/qrcode.min.js"></script>
+<script>
+  let u = navigator.userAgent;
+  let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  let btn = document.querySelector('.btn');
+  let ios = document.querySelector('.ios');
+  let android = document.querySelector('.android');
+  let tutorial = document.querySelector('.tutorial');
+  let codeQR = document.querySelector('.codeQR');
+  let update = document.querySelector('.update');
+  let title = document.querySelector('.title');
+  let hint = document.querySelector('.hint');
+  let codeQRs = new QRCode(document.getElementById("codeQR"), {
+    text: window.location.href || "",
+    width: 150,
+    height: 150,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H,
+  });
+  setInterval(() => {
+    codeQR.style.display = 'block';
+  });
+
+  if (isAndroid) {
+    ios.style.display = 'none';
+    btn.style.marginTop = '20px';
+    tutorial.style.display = 'none';
+  } else if (isiOS) {
+    android.style.display = 'none';
+    btn.innerHTML = 'APP 下载';
+    tutorial.innerHTML = '苹果APP安装教程';
+  } else {
+    btn.style.display = 'none';
+    tutorial.style.display = 'none';
+    hint.style.display = 'none';
+  }
+  if (getQueryString('update')) {
+    if (isiOS) {
+      btn.innerHTML = '更新-苹果-APP';
+      update.style.display = 'block';
+    } else {
+      btn.innerHTML = '更新-安卓-APP';
+      update.style.display = 'none';
+    }
+  }
+</script>
+
+<script>
+  let next = 1;
+  document.getElementById("list1").classList.add("active");
+  document.getElementById("bg2").style.display = "none";
+  document.getElementById("bg3").style.display = "none";
+  document.getElementById("close").onclick = function () {
+    document.getElementById("hint").style.display = "none";
+  };
+  document.getElementById("btn").onclick = function () {
+    if (next == 1) {
+      next++;
+      document.getElementById("bg1").style.display = "none";
+      document.getElementById("bg2").style.display = "block";
+      document.getElementById("list1").classList.remove("active");
+      document.getElementById("list2").classList.add("active");
+    } else if (next == 2) {
+      next++;
+      document.getElementById("bg1").style.display = "none";
+      document.getElementById("bg2").style.display = "none";
+      document.getElementById("bg3").style.display = "block";
+      document.getElementById("list2").classList.remove("active");
+      document.getElementById("list3").classList.add("active");
+    } else {
+      document.getElementById("hint").style.display = "none";
+    }
+  };
+</script>
